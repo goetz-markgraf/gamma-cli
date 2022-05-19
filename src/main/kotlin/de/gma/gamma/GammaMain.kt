@@ -31,7 +31,7 @@ fun main() {
         } else if (inp.startsWith(".")) {
             cmd = inp.drop(1)
             when (cmd) {
-                "exit", "quit", "q", "bye" -> break
+                "exit", "quit", "q", "bye", "b" -> break
 
                 "clear", "c" -> buffer.delete(0, buffer.length)
                 "new" -> scope = ModuleScope()
