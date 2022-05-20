@@ -69,14 +69,14 @@ private fun execute(code: String, scope: Scope) {
     println(code)
 
     try {
-        val parser = Parser(code, "Script")
-        var expr = parser.nextExpression(-1)
+        val parser = Parser(code)
+        var expr = parser.nextExpression()
         while (expr != null) {
             val result = expr.evaluate(scope)
             if (result !is Expression && result !is AbstractFunction)
                 println("-> ${result.prettyPrint()}")
 
-            expr = parser.nextExpression(-1)
+            expr = parser.nextExpression()
         }
 
         println()
