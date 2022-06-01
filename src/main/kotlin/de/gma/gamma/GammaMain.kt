@@ -1,7 +1,7 @@
 package de.gma.gamma
 
 import de.gma.gamma.datatypes.expressions.Expression
-import de.gma.gamma.datatypes.functions.AbstractFunction
+import de.gma.gamma.datatypes.functions.FunctionValue
 import de.gma.gamma.datatypes.scope.ModuleScope
 import de.gma.gamma.datatypes.scope.Scope
 import de.gma.gamma.parser.EvaluationException
@@ -73,7 +73,7 @@ private fun execute(code: String, scope: Scope) {
         var expr = parser.nextExpression()
         while (expr != null) {
             val result = expr.evaluate(scope)
-            if (result !is Expression && result !is AbstractFunction)
+            if (result !is Expression && result !is FunctionValue)
                 println("-> ${result.prettyPrint()}")
 
             expr = parser.nextExpression()
