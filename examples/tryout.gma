@@ -1,0 +1,4 @@
+let abs a =
+    a < 0 ? 0 - a : a
+
+abs -10
