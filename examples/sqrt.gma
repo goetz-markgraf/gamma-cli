@@ -1,5 +1,5 @@
 let abs a =
-    a < 0 ? 0 - a : a
+    a < 0 ? neg a : a
 
 let square a =
     a * a
@@ -7,25 +7,20 @@ let square a =
 let average a b =
     (a + b) / 2.0
 
+
+
 let sqrt x =
+    let sqrt-iter guess x =
+        good-enough? guess x ? guess : sqrt-iter (improve guess x) x
+
+    let good-enough? guess x =
+        abs ((square guess) - x) < 0.000001
+
+    let improve guess x =
+        average guess (x / guess)
+
     sqrt-iter 1.0 x
 
-let sqrt-iter guess x =
-    good-enough? guess x
-    ? guess
-    : sqrt-iter (improve guess x) x
 
-let good-enough? guess x =
-    print* "."
-    abs ((square guess) - x) < 0.000001
 
-let improve guess x =
-    average guess (x / guess)
-
-let result = sqrt 16
-
-print ""
-
-print result
-
-print (square result)
+sqrt 29
