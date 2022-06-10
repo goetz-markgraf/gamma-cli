@@ -1,0 +1,8 @@
+let fac x =
+    when {
+        x = 0 -> 0
+        x = 1 -> 1
+        true -> x * fac (x - 1)
+    }
+
+fac 6.0
