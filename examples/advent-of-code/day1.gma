@@ -1,0 +1,29 @@
+let input =
+    {
+        199
+        200
+        208
+        210
+        200
+        207
+        240
+        269
+        260
+        263
+    }
+
+
+let count-increase list =
+    let ret! = 0
+    let current! = 10000
+
+    list
+    |> for-each [ i ->
+         i > current! ? (set ret! = ret! + 1) : ()
+         set current! = i ]
+
+    ret!
+
+print (input |> count-increase)
+
+read-lines "gamma-cli/examples/advent-of-code/day1.input" |> count-increase
