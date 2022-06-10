@@ -94,10 +94,12 @@ private fun executeScript(file: File) {
     val scope = ModuleScope()
     val code = file.readText()
 
+    val start = System.currentTimeMillis()
     val result = execute(code, scope, false)
+    val duration = System.currentTimeMillis() - start
 
     if (result != null)
-        println("-> ${result.evaluate(scope).prettyPrint()}")
+        println("($duration msec)-> ${result.evaluate(scope).prettyPrint()}")
 }
 
 
