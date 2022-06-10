@@ -1,13 +1,39 @@
 package de.gma.gamma
 
+import de.gma.gamma.datatypes.Value
 import de.gma.gamma.datatypes.expressions.Expression
 import de.gma.gamma.datatypes.functions.FunctionValue
 import de.gma.gamma.datatypes.scope.ModuleScope
 import de.gma.gamma.datatypes.scope.Scope
 import de.gma.gamma.parser.EvaluationException
 import de.gma.gamma.parser.Parser
+import java.io.File
+import kotlin.system.exitProcess
 
-fun main() {
+fun main(args: Array<String>) {
+    if (args.size == 0) {
+        interactive()
+        exitProcess(0)
+    }
+
+    if (args.size == 1) {
+        val filename = args[0]
+        val file = File(filename)
+
+        if (file.exists() && !file.isDirectory) {
+            executeScript(file)
+            exitProcess(0)
+        }
+
+        println("file $filename does not exist or is not a gamma file")
+        exitProcess(-1)
+    }
+
+    println("gamma [filename]")
+    exitProcess(-1)
+}
+
+private fun interactive() {
     var cmd: String
 
     val buffer = StringBuffer()
@@ -64,22 +90,36 @@ private fun printHelp() {
     println("   .help  -> display this help")
 }
 
+private fun executeScript(file: File) {
+    val scope = ModuleScope()
+    val code = file.readText()
 
-private fun execute(code: String, scope: Scope) {
-    println(code)
+    val result = execute(code, scope, false)
+
+    if (result != null)
+        println("-> ${result.evaluate(scope).prettyPrint()}")
+}
+
+
+private fun execute(code: String, scope: Scope, shallPrint: Boolean = true): Value? {
+    if (shallPrint)
+        println(code)
 
     try {
         val parser = Parser(code)
         var expr = parser.nextExpression()
+        var result: Value? = null
         while (expr != null) {
-            val result = expr.evaluate(scope)
-            if (result !is Expression && result !is FunctionValue)
+            result = expr.evaluate(scope)
+            if (result !is Expression && result !is FunctionValue && shallPrint)
                 println("-> ${result.prettyPrint()}")
 
             expr = parser.nextExpression()
         }
 
-        println()
+        if (shallPrint) println()
+        return result
+
     } catch (l: EvaluationException) {
         println()
         println("**** Exception while evaluation code:\n${l::class.java} '${l.message}' in ${l.source}, line: ${l.line}, col: ${l.col}")
@@ -87,4 +127,6 @@ private fun execute(code: String, scope: Scope) {
         println()
         println("**** Exception while evaluation code:\n${e::class.java} '${e.message}'")
     }
+
+    return null
 }
