@@ -14,15 +14,14 @@ let input =
 
 
 let count-increase list =
-    let ret! = 0
     let current! = 10000
 
-    list
-    |> for-each [ i ->
-         i > current! ? (set ret! = ret! + 1) : ()
-         set current! = i ]
+    list |> fold 0 [ acc i ->
+        let increase = i > current!
+        set current! = i
+        acc + (increase ? 1 : 0) ]
 
-    ret!
+
 
 print (input |> count-increase)
 
