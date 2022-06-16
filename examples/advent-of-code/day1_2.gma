@@ -26,7 +26,7 @@ let count-increase-window list =
                 )
         }
 
-    count-rec 100000 list
+    (count-rec 0 list) - 1
 
 print (join " " {"test:", count-increase-window test-input})
 
