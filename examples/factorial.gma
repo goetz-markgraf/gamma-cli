@@ -5,4 +5,4 @@ let fac x =
         true -> x * fac (x - 1)
     }
 
-fac 6.0
+fac 20
