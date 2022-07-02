@@ -125,6 +125,7 @@ private fun execute(code: String, scope: Scope, shallPrint: Boolean = true): Val
     } catch (l: EvaluationException) {
         println()
         println("**** Exception while evaluation code:\n${l::class.java} '${l.message}' in ${l.source}, line: ${l.line}, col: ${l.col}")
+        l.printStackTrace()
     } catch (e: Exception) {
         println()
         println("**** Exception while evaluation code:\n${e::class.java} '${e.message}'")
