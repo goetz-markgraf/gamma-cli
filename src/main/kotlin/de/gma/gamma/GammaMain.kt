@@ -91,6 +91,7 @@ private fun printHelp() {
 }
 
 private fun executeScript(file: File) {
+    println("Executing: ${file.name}")
     val scope = ModuleScope()
     val code = file.readText()
 
