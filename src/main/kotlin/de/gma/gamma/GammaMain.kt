@@ -39,7 +39,7 @@ private fun interactive() {
     val buffer = StringBuffer()
     var lastBuffer = ""
 
-    var scope = ModuleScope()
+    var scope = ModuleScope("REPL")
 
     printHelp()
 
@@ -60,7 +60,7 @@ private fun interactive() {
                 "exit", "quit", "q", "bye", "b" -> break
 
                 "clear", "c" -> buffer.delete(0, buffer.length)
-                "new" -> scope = ModuleScope()
+                "new" -> scope = ModuleScope("REPL")
 
                 "load", "l" -> {
                     buffer.delete(0, buffer.length)
@@ -92,7 +92,7 @@ private fun printHelp() {
 
 private fun executeScript(file: File) {
     println("Executing: ${file.name}")
-    val scope = ModuleScope()
+    val scope = ModuleScope(file.name)
     val code = file.readText()
 
     val start = System.currentTimeMillis()
