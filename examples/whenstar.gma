@@ -1,0 +1,13 @@
+'Try a neat when*'
+
+let a = {:a → 1}
+
+when* a {
+    is-string? → "String"
+    is-integer? → "Integer"
+    is-float? → "Float"
+    is-empty? → "Empty"
+    [v : is-list? v ∧ size v = 2] → "Pair"
+    is-list? → "List"
+    else → "Don't know"
+}
