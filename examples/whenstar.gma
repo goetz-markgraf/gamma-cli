@@ -1,6 +1,8 @@
 'Try a neat when*'
 
 let a = {:a → 1}
+#let a = print
+#let a = super
 
 when* a {
     is-string? → "String"
@@ -9,5 +11,8 @@ when* a {
     is-empty? → "Empty"
     [v : is-list? v ∧ size v = 2] → "Pair"
     is-list? → "List"
+    is-function? → "Function"
+    is-property? → "Property"
+    is-record? → "Record"
     else → "Don't know"
 }
