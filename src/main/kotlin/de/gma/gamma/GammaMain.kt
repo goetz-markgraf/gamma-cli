@@ -36,7 +36,7 @@ fun main(args: Array<String>) {
 private fun interactive() {
     var cmd: String
 
-    val buffer = StringBuffer()
+    val buffer = StringBuilder()
     var lastBuffer = ""
 
     var scope = ModuleScope("REPL")
