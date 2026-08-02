@@ -5,7 +5,7 @@ import de.gma.gamma.datatypes.expressions.Expression
 import de.gma.gamma.datatypes.functions.FunctionValue
 import de.gma.gamma.datatypes.scope.ModuleScope
 import de.gma.gamma.datatypes.scope.Scope
-import de.gma.gamma.parser.EvaluationException
+import de.gma.gamma.parser.GammaException
 import de.gma.gamma.parser.Parser
 import java.io.File
 import kotlin.system.exitProcess
@@ -123,10 +123,10 @@ private fun execute(code: String, scope: Scope, shallPrint: Boolean = true): Val
         if (shallPrint) println()
         return result
 
-    } catch (l: EvaluationException) {
+    } catch (l: GammaException) {
         println()
         println("**** Exception while evaluation code:\n${l::class} '${l.message}' in ${l.source}, line: ${l.line}, col: ${l.col}")
-        print(l.stackTraceAsString())
+        l.printStackTrace()
     } catch (e: Exception) {
         println()
         println("**** Exception while evaluation code:\n${e::class} '${e.message}'")

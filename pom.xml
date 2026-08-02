@@ -13,9 +13,9 @@
 
     <properties>
         <main.class>de.gma.gamma.GammaMainKt</main.class>
-        <java.version>17</java.version>
+        <java.version>25</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <kotlin.version>1.7.20</kotlin.version>
+        <kotlin.version>2.4.10</kotlin.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <junit-jupiter.version>5.9.0</junit-jupiter.version>
         <kotlin.code.style>official</kotlin.code.style>
@@ -61,6 +61,9 @@
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
+                <configuration>
+                    <jvmTarget>${java.version}</jvmTarget>
+                </configuration>
                 <executions>
                     <execution>
                         <id>compile</id>
@@ -81,12 +84,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.5.6</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.8.0</version>
                 <executions>
                     <execution>
                         <id>make-assembly</id>
