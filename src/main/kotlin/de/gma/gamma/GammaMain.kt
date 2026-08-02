@@ -125,7 +125,7 @@ private fun execute(code: String, scope: Scope, shallPrint: Boolean = true): Val
 
     } catch (l: GammaException) {
         println()
-        println("**** Exception while evaluation code:\n${l::class} '${l.message}' in ${l.source}, line: ${l.line}, col: ${l.col}")
+        println("**** Exception while evaluation code:\n${l.javaClass.simpleName} '${l.message}' in ${l.source}, line: ${l.line}, col: ${l.col}")
         l.printStackTrace()
     } catch (e: Exception) {
         println()
