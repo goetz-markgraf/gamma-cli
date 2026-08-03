@@ -1,5 +1,6 @@
 package de.gma.gamma
 
+import de.gma.gamma.builtins.GammaBaseScope
 import de.gma.gamma.datatypes.Value
 import de.gma.gamma.datatypes.expressions.Expression
 import de.gma.gamma.datatypes.functions.FunctionValue
@@ -39,7 +40,7 @@ private fun interactive() {
     val buffer = StringBuilder()
     var lastBuffer = ""
 
-    var scope = ModuleScope("REPL")
+    var scope = ModuleScope("REPL", GammaBaseScope())
 
     printHelp()
 
@@ -60,7 +61,7 @@ private fun interactive() {
                 "exit", "quit", "q", "bye", "b" -> break
 
                 "clear", "c" -> buffer.delete(0, buffer.length)
-                "new" -> scope = ModuleScope("REPL")
+                "new" -> scope = ModuleScope("REPL", GammaBaseScope())
 
                 "load", "l" -> {
                     buffer.delete(0, buffer.length)
@@ -92,7 +93,7 @@ private fun printHelp() {
 
 private fun executeScript(file: File) {
     println("Executing: ${file.name}")
-    val scope = ModuleScope(file.name)
+    val scope = ModuleScope(file.name, GammaBaseScope())
     val code = file.readText()
 
     val start = System.currentTimeMillis()
